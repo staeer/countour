@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контур: Сигнальный код</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow-a"></div>
+  <div class="bg-glow bg-glow-b"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div class="brand-text">
+        <h1>КОНТУР<span class="accent">:</span> СИГНАЛЬНЫЙ КОД</h1>
+        <p class="subtitle">Собери электрическую сеть — подай энергию ко всем приёмникам</p>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="stat-label">ХОДЫ</span><span id="moves" class="stat-value">0</span></div>
+      <div class="stat"><span class="stat-label">ЭНЕРГИЯ</span><span id="powered" class="stat-value">0/0</span></div>
+      <div class="stat"><span class="stat-label">ВРЕМЯ</span><span id="timer" class="stat-value">0:00</span></div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel level-panel">
+      <h2 class="panel-title">Уровни сети</h2>
+      <div id="levelList" class="level-list"></div>
+      <div class="legend">
+        <h3 class="legend-title">Обозначения</h3>
+        <div class="legend-item"><svg viewBox="0 0 24 24" class="lg-svg"><polygon points="12,3 21,12 12,21 3,12" class="lg-src"/></svg><span>Источник энергии</span></div>
+        <div class="legend-item"><svg viewBox="0 0 24 24" class="lg-svg"><rect x="5" y="5" width="14" height="14" rx="3" class="lg-rx"/><circle cx="12" cy="12" r="3" class="lg-rx-dot"/></svg><span>Приёмник сигнала</span></div>
+        <div class="legend-item"><svg viewBox="0 0 24 24" class="lg-svg"><line x1="4" y1="12" x2="20" y2="12" class="lg-wire"/></svg><span>Проводник</span></div>
+        <div class="legend-item"><svg viewBox="0 0 24 24" class="lg-svg"><path d="M4 12 H12 V20" class="lg-wire"/></svg><span>Уголок / разветвление</span></div>
+        <div class="legend-item"><svg viewBox="0 0 24 24" class="lg-svg"><rect x="6" y="6" width="12" height="12" rx="2" class="lg-block"/></svg><span>Блокировка</span></div>
+      </div>
+    </aside>
+
+    <section class="board-wrap">
+      <div class="board-frame">
+        <canvas id="board" width="640" height="640"></canvas>
+        <div id="toast" class="toast hidden"></div>
+      </div>
+      <div class="controls">
+        <button id="btnShuffle" class="btn">🔀 Перемешать</button>
+        <button id="btnHint" class="btn btn-accent">💡 Подсказка</button>
+        <button id="btnReset" class="btn">↺ Сброс уровня</button>
+      </div>
+      <p class="hint-text">Нажимай на клетки — провод поворачивается по часовой стрелке. Соедини все элементы в одну светящуюся сеть.</p>
+    </section>
+  </main>
+
+  <div id="winOverlay" class="overlay hidden">
+    <div class="win-card">
+      <div class="win-bolt">⚡</div>
+      <h2>СЕТЬ АКТИВНА</h2>
+      <p id="winText" class="win-sub">Все приёмники получают энергию!</p>
+      <div class="win-stats" id="winStats"></div>
+      <div class="win-actions">
+        <button id="btnNext" class="btn btn-big btn-accent">СЛЕДУЮЩИЙ УРОВЕНЬ ➜</button>
+        <button id="btnReplay" class="btn btn-big">Пройти заново</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
